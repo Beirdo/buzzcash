@@ -47,7 +47,7 @@ unsigned int nTargetSpacing = 2 * 30;
 static const int64_t nInterval = nTargetTimespan / nTargetSpacing;
 static const int64_t nDiffChangeTarget = 1;
 
-unsigned int nStakeMinAge = 6 * 60 * 60;
+unsigned int nStakeMinAge = 7 * 60 * 60;
 unsigned int nStakeMaxAge = -1;
 unsigned int nModifierInterval = 10 * 60;
 
@@ -1020,19 +1020,17 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 // miner's coin stake reward based on coin age spent (coin-days)
 int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
 {
+    int64_t nSubsidy = 0 * COIN;
+    int64_t height = pindexBest->nHeight + 1;
 
-
-    int64_t nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
-
-        if(pindexBest->nHeight+1 >= 20000 && pindexBest->nHeight+1 <= 500000)
+    if(height >= 200 && height <= 250000)
     {
         nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
     }
-        else if(pindexBest->nHeight+1 >= 500001)
+    else if(height > 250000)
     {
-        nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
+        nSubsidy = nCoinAge * COIN_YEAR_REWARD / 10 * 33 / (365 * 33 + 8);
     }
-
 
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nCoinAge);
