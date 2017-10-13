@@ -1,5 +1,16 @@
 *.swp
 *.bak
 *~
-*.
+*.o
 *.a
+*.qm
+.qmake.stash
+Makefile
+Makefile.Debug
+Makefile.Release
+build/
+buzzcash-qt_plugin_import.cpp
+object_script.BuzzCash-qt.Debug
+object_script.BuzzCash-qt.Release
+release/
+
