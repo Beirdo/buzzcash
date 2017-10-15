@@ -1,4 +1,4 @@
-# For building windows builds from Linux using MXE
+# For building 64-bit windows builds from Linux using MXE
 
 TEMPLATE = app
 TARGET = BuzzCash-qt
@@ -54,7 +54,7 @@ QMAKE_LFLAGS *= -fstack-protector-all --param ssp-buffer-size=1
 # for extra security on Windows: enable ASLR and DEP via GCC linker flags
 win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat
 # on win32: enable GCC large address aware linker flag
-win32:QMAKE_LFLAGS *= -Wl,--large-address-aware -static
+win32:QMAKE_LFLAGS *= -static
 win32:QMAKE_LFLAGS += -static-libgcc -static-libstdc++
 lessThan(QT_MAJOR_VERSION, 5): win32: QMAKE_LFLAGS *= -static
 
@@ -395,17 +395,17 @@ isEmpty(BOOST_INCLUDE_PATH) {
     macx:BOOST_INCLUDE_PATH = /opt/local/include
 }
 
-MXE_PATH=/home/ubuntu/src/mxe
-BOOST_INCLUDE_PATH=${MXE_PATH}/usr/i686-w64-mingw32.static/include
-BOOST_LIB_PATH=${MXE_PATH}/usr/i686-w64-mingw32.static/lib
-BDB_INCLUDE_PATH=${MXE_PATH}/usr/i686-w64-mingw32.static/include
-BDB_LIB_PATH=${MXE_PATH}/usr/i686-w64-mingw32.static/lib
-OPENSSL_INCLUDE_PATH=${MXE_PATH}/usr/i686-w64-mingw32.static/include
-OPENSSL_LIB_PATH=${MXE_PATH}/usr/i686-w64-mingw32.static/lib
-MINIUPNPC_INCLUDE_PATH=${MXE_PATH}/usr/i686-w64-mingw32.static/include
-MINIUPNPC_LIB_PATH=${MXE_PATH}/usr/i686-w64-mingw32.static/lib
-QRENCODE_INCLUDE_PATH=${MXE_PATH}/usr/i686-w64-mingw32.static/include
-QRENCODE_LIB_PATH=${MXE_PATH}/usr/i686-w64-mingw32.static/lib
+MXE_PATH=/opt/mxe
+BOOST_INCLUDE_PATH=${MXE_PATH}/usr/x86_64-w64-mingw32.static/include
+BOOST_LIB_PATH=${MXE_PATH}/usr/x86_64-w64-mingw32.static/lib
+BDB_INCLUDE_PATH=${MXE_PATH}/usr/x86_64-w64-mingw32.static/include
+BDB_LIB_PATH=${MXE_PATH}/usr/x86_64-w64-mingw32.static/lib
+OPENSSL_INCLUDE_PATH=${MXE_PATH}/usr/x86_64-w64-mingw32.static/include
+OPENSSL_LIB_PATH=${MXE_PATH}/usr/x86_64-w64-mingw32.static/lib
+MINIUPNPC_INCLUDE_PATH=${MXE_PATH}/usr/x86_64-w64-mingw32.static/include
+MINIUPNPC_LIB_PATH=${MXE_PATH}/usr/x86_64-w64-mingw32.static/lib
+QRENCODE_INCLUDE_PATH=${MXE_PATH}/usr/x86_64-w64-mingw32.static/include
+QRENCODE_LIB_PATH=${MXE_PATH}/usr/x86_64-w64-mingw32.static/lib
 
 windows:DEFINES += WIN32
 windows:RC_FILE = src/qt/res/bitcoin-qt.rc
