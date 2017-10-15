@@ -13,6 +13,7 @@
 
 #include <sys/types.h>
 #include <unistd.h>
+#include <pthread.h>
 
 #include <db_cxx.h>
 
