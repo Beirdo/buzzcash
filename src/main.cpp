@@ -578,9 +578,11 @@ bool CTxMemPool::accept(CTxDB& txdb, CTransaction &tx, bool fCheckInputs,
     if ((int64_t)tx.nLockTime > std::numeric_limits<int>::max())
         return error("CTxMemPool::accept() : not accepting nLockTime beyond 2038 yet");
 
+#ifndef ALLOW_BURN
     // Rather not work on nonstandard transactions (unless -testnet)
     if (!fTestNet && !tx.IsStandard())
         return error("CTxMemPool::accept() : nonstandard transaction type");
+#endif
 
     // Do we already have it?
     uint256 hash = tx.GetHash();
